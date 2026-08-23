@@ -1,6 +1,7 @@
-import qrcode 
+
 
 class QR:
+    import qrcode 
     
     def __init__(self,url,img_name):
         self.url = url
