@@ -2,7 +2,7 @@
 class QR:
     import qrcode 
 
-    #class cunstructor
+    #class constructor
     def __init__(self,url,img_name):
         self.url = url
         self.img_name = img_name

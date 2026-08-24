@@ -12,17 +12,9 @@ button.pack()
 window.mainloop()
 
 
-pngName = input("Enter the name you want for your code (must end in .png):")
+pngName = input("Enter the name you want for your code:")
+pngName += ".png"
 
-
-try:
-   if pngName.endswith(".png"):
-       pass
-   else:
-       raise ValueError("File name must end with .png")
-
-except ValueError as e:
-    print(f"Error: {e}")
 
 #need to add exception handling for invalid url
 url = input("Enter the URL you want to generate a QR code for: ")
