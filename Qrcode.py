@@ -1,5 +1,4 @@
 
-
 class QR:
     import qrcode 
     
@@ -9,10 +8,12 @@ class QR:
 
 
     def generate_qr(self, file_path):
+        import os
         qr = self.qrcode.QRCode()
         qr.add_data(self.url)
         img = qr.make_image()
-        img.save(file_path + self.img_name)
+        full_path = os.path.join(file_path, self.img_name)
+        img.save(full_path)
 
     def success_message(self):
         print("QR code generated successfully!")
