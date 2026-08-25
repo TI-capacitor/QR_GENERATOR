@@ -1,6 +1,32 @@
-from Qrcode import QR
 from tkinter import Tk, filedialog
 from tkinter import *
+import qrcode 
+import os
+
+
+
+######
+class qrcode:
+   
+
+    #class constructor
+    def __init__(self,url,img_name):
+        self.url = url
+        self.img_name = img_name
+
+    #generate qr code and save it to the specified file path
+    def generate_qr(self, file_path):
+        
+        qr = qrcode.QRCode()
+        qr.add_data(self.url)
+        img = qr.make_image()
+
+        full_path = os.path.join(file_path, self.img_name) #properly concatenates the file and image name
+        img.save(full_path)
+
+    def success_message(self):
+        print("QR code generated successfully!")
+########
 
 def openFile():
     global filepath
@@ -20,7 +46,7 @@ pngName += ".png"
 url = input("Enter the URL you want to generate a QR code for: ")
 
 
-qr_code = QR(url, pngName)  #create instance of QR class
-qr_code.generate_qr(filepath) #creates qr code with path provided by window GUI
-qr_code.success_message()
+qr = QR(url, pngName)  #create instance of QR class
+qr.generate_qr(filepath) #creates qr code with path provided by window GUI
+qr.success_message()
 print(filepath)
