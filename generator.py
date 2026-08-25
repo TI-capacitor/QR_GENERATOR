@@ -3,10 +3,10 @@ from tkinter import *
 import qrcode 
 import os
 
+filepath = ""
 
-
-######
-class qrcode:
+#Class that manages creation of qr codes and saving path
+class Qrcode:
    
 
     #class constructor
@@ -16,7 +16,6 @@ class qrcode:
 
     #generate qr code and save it to the specified file path
     def generate_qr(self, file_path):
-        
         qr = qrcode.QRCode()
         qr.add_data(self.url)
         img = qr.make_image()
@@ -25,28 +24,38 @@ class qrcode:
         img.save(full_path)
 
     def success_message(self):
-        print("QR code generated successfully!")
+        print("QR code generated successfully, saved at {}".format(full_path))
 ########
-
 def openFile():
     global filepath
     filepath = filedialog.askdirectory()
+    window.destroy()
 
-window = Tk()
-button = Button(text="Open Directory",command=openFile)
-button.pack()
-window.mainloop()
-
-
-pngName = input("Enter the name you want for your code:")
-pngName += ".png"
+#Placeholder class for handling GUI
+class GUI:
+    pass #avoids runtime errors, does nothing
 
 
-#need to add exception handling for invalid url
-url = input("Enter the URL you want to generate a QR code for: ")
+
+def main():
+    window = Tk()
+    button = Button(text="Open Directory",command=openFile)
+    button.pack()
+    window.mainloop()
 
 
-qr = QR(url, pngName)  #create instance of QR class
-qr.generate_qr(filepath) #creates qr code with path provided by window GUI
-qr.success_message()
-print(filepath)
+    pngName = input("Enter the name you want for your code:")
+    pngName += ".png"
+
+
+    #need to add exception handling for invalid url
+    url = input("Enter the URL you want to generate a QR code for: ")
+
+
+    qr = Qrcode(url, pngName)  #create instance of QR class
+    qr.generate_qr(filepath) #creates qr code with path provided by window GUI
+    qr.success_message()
+    print(filepath)
+
+if __name__=="__main__":
+    main()
