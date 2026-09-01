@@ -18,6 +18,7 @@ class GUI:
 
     def set_directory(self):
         self.file_path = filedialog.askdirectory()
+        self.close_window()
 
     def get_directory(self):
         return self.file_path
@@ -59,7 +60,7 @@ qr.success_message()
 
 
 
-#need to add exception handling for invalid url
+
 
 
 
