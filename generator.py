@@ -34,21 +34,22 @@ def openFile():
 class GUI:
     def __init__(self,file_path):
         self.file_path = file_path
-
+        self.window = Tk()
+        
     def openFile():
         self.file_path = filedialog.askdirectory()
-        window.destroy() #file dialog window upon selection of folders
+         #file dialog window upon selection of folders
 
     def closeFile():
-        pass
+        window.destroy()
         
 
 # This will go in the GUI class
-window = Tk()
-button = Button(text="Open Directory",command=openFile)
-button.pack()
-window.mainloop()
-#
+window = Tk() #Creates application window
+button = Button(text="Open Directory",command=openFile)  #creates clickable button
+button.pack() #places button in window and sizes to fit said button
+window.mainloop() #Keeps the window open
+
 
 pngName = input("Enter the name you want for your code:")
 pngName += ".png"
