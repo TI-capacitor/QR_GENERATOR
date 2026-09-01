@@ -63,6 +63,7 @@ while(pngNotEmpty):
     else:
         print("ERROR: name of picture cannot be blank")
 
+#Validate user input for url
 url = input("Enter the URL you want to generate a QR code for: ")
 qr = Qrcode(url, pngName, gui.get_directory())  #create instance of QR class
 qr.get_qr() #creates qr code with path provided by window GUI
