@@ -3,64 +3,66 @@ from tkinter import *
 import qrcode 
 import os
 
-filepath = ""
+#Placeholder class for handling GUI
+class GUI:
+    def __init__(self):
+        self.window = Tk()
+        self.button = Button(text="Open Directory",command=self.set_directory)  #creates clickable button, command calls the get_directory method
+        self.button.pack()
+        self.file_path = ""
+
+    def show_window(self):
+        self.window.mainloop()
+
+        
+
+    def set_directory(self):
+        self.file_path = filedialog.askdirectory()
+
+    def get_directory(self):
+        return self.file_path
+
+    def close_window(self):
+        self.window.destroy()
+        
 
 #Class that manages creation of qr codes and saving path
 class Qrcode:
     #class constructor
-    def __init__(self,url,img_name):
+    def __init__(self,url,img_name,file_path):
         self.url = url
-        self.img_name = img_name
+        self.file_path = file_path
+        self.img_name = img_name + ".png"
 
     #generate qr code and save it to the specified file path
-    def generate_qr(self, file_path):
+    def get_qr(self):
         qr = qrcode.QRCode()
         qr.add_data(self.url)
         img = qr.make_image()
-
-        self.full_path = os.path.join(file_path, self.img_name) #properly concatenates the file and image name
+        self.full_path = os.path.join(self.file_path, self.img_name) #properly concatenates the file and image name
         img.save(self.full_path)
 
     def success_message(self):
         print("QR code generated successfully, saved at {}".format(self.full_path))
 
-########
-def openFile():
-    global filepath
-    filepath = filedialog.askdirectory()
-    window.destroy() #file dialog window upon selection of folders
-
-#Placeholder class for handling GUI
-class GUI:
-    def __init__(self,file_path):
-        self.file_path = file_path
-        self.window = Tk()
-        
-    def openFile():
-        self.file_path = filedialog.askdirectory()
-         #file dialog window upon selection of folders
-
-    def closeFile():
-        window.destroy()
-        
-
-# This will go in the GUI class
-window = Tk() #Creates application window
-button = Button(text="Open Directory",command=openFile)  #creates clickable button
-button.pack() #places button in window and sizes to fit said button
-window.mainloop() #Keeps the window open
 
 
+gui = GUI()
+gui.set_directory()
+directory_path = gui.get_directory()
 pngName = input("Enter the name you want for your code:")
-pngName += ".png"
+url = input("Enter the URL you want to generate a QR code for: ")
+qr = Qrcode(url, pngName, gui.get_directory())  #create instance of QR class
+qr.get_qr() #creates qr code with path provided by window GUI
+qr.success_message()
+
+
 
 
 #need to add exception handling for invalid url
-url = input("Enter the URL you want to generate a QR code for: ")
 
 
-qr = Qrcode(url, pngName)  #create instance of QR class
-qr.generate_qr(filepath) #creates qr code with path provided by window GUI
-qr.success_message()
-print(filepath)
+
+
+
 
