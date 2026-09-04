@@ -36,8 +36,8 @@ class Qrcode:
         self.url = url
         self.file_path = file_path
         self.img_name = img_name
-        if not img_name.endswith(".png"):
-            img_name += ".png"
+        if not self.img_name.endswith(".png"):
+            self.img_name += ".png"
         
     #generate qr code and save it to the specified file path
     def get_qr(self):
@@ -53,32 +53,33 @@ class Qrcode:
 
 url = ""
 pngName = ""
-pngNotEmpty = True
+pngEmpty = True
+urlEmpty = True
 gui = GUI()
 gui.show_window()  #opens window for user to select directory
 directory_path = gui.get_directory()
 
 
-while(pngNotEmpty):
+while(pngEmpty):
     pngName = input("Enter the name you want for your code:").strip()   #strip() removes whitespace from the beginning and end of the string
 
     
     if pngName:
         print("Name entered for image {}".format(pngName))
-        pngNotEmpty = False
+        pngEmpty = False
         
     else:
         print("ERROR: name of picture cannot be blank")
 
 #Validate user input for url
-urlNotEmpty = True
 
-while(urlNotEmpty): 
+
+while(urlEmpty): 
     url = input("Enter the URL you want to generate a QR code for: ").strip()  #strip() removes whitespace from the beginning and end of the string
 
     if url:
         print("URL entered for QR code {}".format(url))
-        urlNotEmpty = False
+        urlEmpty = False
 
     else:
         print("ERROR: URL cannot be blank")
