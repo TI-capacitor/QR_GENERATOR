@@ -16,15 +16,26 @@ class GUI:
         self.window.mainloop() 
         
     def set_directory(self):
-        self.file_path = filedialog.askdirectory() #prompts user for file path
-        if self.file_path: #checks if user selected a directory
-            self.close_window() #closes window if user selected a directory
+        try:
+            self.file_path = filedialog.askdirectory() #prompts user for file dialog box, line that may fail
+
+            if not self.file_path: #if the user presses cancel or enters a empty url, let them know
+                print("No URL entered!!!")
+  
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+            return None
+
+        finally: #closes file dialog box
+            self.window.destroy()
+
         
+    
     def get_directory(self):
         return self.file_path #returns file path
 
-    def close_window(self):
-        self.window.destroy() #closes window upon choosing directory
+    # def close_window(self):
+    #     self.window.destroy() #closes window upon choosing directory
 
         
 
@@ -55,10 +66,11 @@ url = ""
 pngName = ""
 pngEmpty = True
 urlEmpty = True
+
+
 gui = GUI()
 gui.show_window()  #opens window for user to select directory
 directory_path = gui.get_directory()
-
 
 while(pngEmpty):
     pngName = input("Enter the name you want for your code:").strip()   #strip() removes whitespace from the beginning and end of the string
