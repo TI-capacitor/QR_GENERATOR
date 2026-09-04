@@ -1,9 +1,10 @@
+from py_compile import main
 from tkinter import Tk, filedialog
 from tkinter import *
 import qrcode 
 import os
 
-#Placeholder class for handling GUI
+#Class for handling GUI
 class GUI:
     def __init__(self):
         self.window = Tk()
@@ -12,29 +13,32 @@ class GUI:
         self.file_path = ""
 
     def show_window(self):
-        self.window.mainloop()
-
+        self.window.mainloop() 
         
-
     def set_directory(self):
-        self.file_path = filedialog.askdirectory()
-        self.close_window()
-
+        self.file_path = filedialog.askdirectory() #prompts user for file path
+        if self.file_path: #checks if user selected a directory
+            self.close_window() #closes window if user selected a directory
+        
     def get_directory(self):
-        return self.file_path
+        return self.file_path #returns file path
 
     def close_window(self):
-        self.window.destroy()
+        self.window.destroy() #closes window upon choosing directory
+
         
 
-#Class that manages creation of qr codes and saving path
+#Class that manages creation of qr codes
+#exception handling should happen in main code
 class Qrcode:
     #class constructor
     def __init__(self,url,img_name,file_path):
         self.url = url
         self.file_path = file_path
-        self.img_name = img_name + ".png"
-
+        self.img_name = img_name
+        if not self.img_name.endswith(".png"):
+            self.img_name += ".png"
+        
     #generate qr code and save it to the specified file path
     def get_qr(self):
         qr = qrcode.QRCode()
@@ -47,18 +51,46 @@ class Qrcode:
         print("QR code generated successfully, saved at {}".format(self.full_path))
 
 
-
+url = ""
+pngName = ""
+pngEmpty = True
+urlEmpty = True
 gui = GUI()
-gui.set_directory()
+gui.show_window()  #opens window for user to select directory
 directory_path = gui.get_directory()
-pngName = input("Enter the name you want for your code:")
-url = input("Enter the URL you want to generate a QR code for: ")
-qr = Qrcode(url, pngName, gui.get_directory())  #create instance of QR class
+
+
+while(pngEmpty):
+    pngName = input("Enter the name you want for your code:").strip()   #strip() removes whitespace from the beginning and end of the string
+
+    
+    if pngName:
+        print("Name entered for image {}".format(pngName))
+        pngEmpty = False
+        
+    else:
+        print("ERROR: name of picture cannot be blank")
+
+#Validate user input for url
+
+
+while(urlEmpty): 
+    url = input("Enter the URL you want to generate a QR code for: ").strip()  #strip() removes whitespace from the beginning and end of the string
+
+    if url:
+        print("URL entered for QR code {}".format(url))
+        urlEmpty = False
+
+    else:
+        print("ERROR: URL cannot be blank")
+
+qr = Qrcode(url, pngName, directory_path)  #create instance of QR class
 qr.get_qr() #creates qr code with path provided by window GUI
 qr.success_message()
 
 
-
+# if __name__ == "__main__":
+#     main()
 
 
 
