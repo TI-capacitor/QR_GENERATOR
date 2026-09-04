@@ -33,10 +33,6 @@ class GUI:
     
     def get_directory(self):
         return self.file_path #returns file path
-
-    # def close_window(self):
-    #     self.window.destroy() #closes window upon choosing directory
-
         
 
 #Class that manages creation of qr codes
