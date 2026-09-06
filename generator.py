@@ -3,6 +3,7 @@ from tkinter import Tk, filedialog
 from tkinter import *
 import qrcode 
 import os
+import sys
 
 #Class for handling GUI
 class GUI:
@@ -16,21 +17,18 @@ class GUI:
         self.window.mainloop() 
         
     def set_directory(self):
-        try:
-            self.file_path = filedialog.askdirectory() #prompts user for file dialog box, line that may fail
+            try:
+                print("Opening file dialog")
+                self.file_path = filedialog.askdirectory() #prompts user for file dialog box, line that may fail
 
-            if not self.file_path: #if the user presses cancel or enters a empty url, let them know
-                print("No URL entered!!!")
-  
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-            return None
+                if not self.file_path: #if the user presses cancel or enters a empty url, let them know
+                    print("User pressed cancel")
+                else:
+                    self.window.destroy()
 
-        finally: #closes file dialog box
-            self.window.destroy()
+            finally:
+                print("Filedalog is closing...")
 
-        
-    
     def get_directory(self):
         return self.file_path #returns file path
         
@@ -55,7 +53,7 @@ class Qrcode:
         img.save(self.full_path)
 
     def success_message(self):
-        print("QR code generated successfully, saved at {}".format(self.full_path))
+        print(f"QR code generated successfully, saved at {self.full_path}")
 
 
 url = ""
@@ -66,14 +64,21 @@ urlEmpty = True
 
 gui = GUI()
 gui.show_window()  #opens window for user to select directory
+directory_path = ""
+
 directory_path = gui.get_directory()
 
-while(pngEmpty):
-    pngName = input("Enter the name you want for your code:").strip()   #strip() removes whitespace from the beginning and end of the string
+if not directory_path: #exiting pressing the x button on the GUI leaves the directory path empty, causing the program to close
+    print("Goodbye!!!")
+    sys.exit()
 
+
+
+while pngEmpty:
+    pngName = input("Enter the name you want for your code:").strip()   #strip() removes whitespace from the beginning and end of the string
     
     if pngName:
-        print("Name entered for image {}".format(pngName))
+        print(f"Name entered for image {pngName}")
         pngEmpty = False
         
     else:
@@ -81,12 +86,11 @@ while(pngEmpty):
 
 #Validate user input for url
 
-
-while(urlEmpty): 
+while urlEmpty: 
     url = input("Enter the URL you want to generate a QR code for: ").strip()  #strip() removes whitespace from the beginning and end of the string
 
     if url:
-        print("URL entered for QR code {}".format(url))
+        print(f"URL entered for QR code {url}")
         urlEmpty = False
 
     else:
@@ -95,10 +99,6 @@ while(urlEmpty):
 qr = Qrcode(url, pngName, directory_path)  #create instance of QR class
 qr.get_qr() #creates qr code with path provided by window GUI
 qr.success_message()
-
-
-# if __name__ == "__main__":
-#     main()
 
 
 
