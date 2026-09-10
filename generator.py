@@ -17,17 +17,15 @@ class GUI:
         self.window.mainloop() 
         
     def set_directory(self):
-            try:
-                print("Opening file dialog")
-                self.file_path = filedialog.askdirectory() #prompts user for file dialog box, line that may fail
+        print("Opening file dialog")
+        self.file_path = filedialog.askdirectory() #prompts user for file dialog box, line that may fail
 
-                if not self.file_path: #if the user presses cancel or enters a empty url, let them know
-                    print("User pressed cancel")
-                else:
-                    self.window.destroy()
+        if not self.file_path: #if the user presses cancel or enters a empty url, let them know
+            print("User pressed cancel")
+        else:
+            self.window.destroy()
 
-            finally:
-                print("Filedalog is closing...")
+        print("Filedalog is closing...")
 
     def get_directory(self):
         return self.file_path #returns file path
@@ -55,17 +53,8 @@ class Qrcode:
     def success_message(self):
         print(f"QR code generated successfully, saved at {self.full_path}")
 
-
-url = ""
-pngName = ""
-pngEmpty = True
-urlEmpty = True
-
-
 gui = GUI()
 gui.show_window()  #opens window for user to select directory
-directory_path = ""
-
 directory_path = gui.get_directory()
 
 if not directory_path: #exiting pressing the x button on the GUI leaves the directory path empty, causing the program to close
