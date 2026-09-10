@@ -1,4 +1,3 @@
-from py_compile import main
 from tkinter import Tk, filedialog
 from tkinter import *
 import qrcode 
@@ -17,17 +16,15 @@ class GUI:
         self.window.mainloop() 
         
     def set_directory(self):
-            try:
-                print("Opening file dialog")
-                self.file_path = filedialog.askdirectory() #prompts user for file dialog box, line that may fail
+        print("Opening file dialog")
+        self.file_path = filedialog.askdirectory() #prompts user for file dialog box, line that may fail
 
-                if not self.file_path: #if the user presses cancel or enters a empty url, let them know
-                    print("User pressed cancel")
-                else:
-                    self.window.destroy()
+        if not self.file_path: #if the user presses cancel or enters a empty url, let them know
+            print("User pressed cancel")
+        else:
+            self.window.destroy()
 
-            finally:
-                print("Filedalog is closing...")
+        print("Filedalog is closing...")
 
     def get_directory(self):
         return self.file_path #returns file path
@@ -38,11 +35,13 @@ class GUI:
 class Qrcode:
     #class constructor
     def __init__(self,url,img_name,file_path):
-        self.url = url
-        self.file_path = file_path
-        self.img_name = img_name
+        self.url = url.strip()
+        self.file_path = file_path.strip() #removes whitespace from the beginning and end of the string`
+        self.img_name = img_name.strip()
         if not self.img_name.endswith(".png"):
-            self.img_name += ".png"
+                    self.img_name += ".png"
+        
+        
         
     #generate qr code and save it to the specified file path
     def get_qr(self):
@@ -55,17 +54,8 @@ class Qrcode:
     def success_message(self):
         print(f"QR code generated successfully, saved at {self.full_path}")
 
-
-url = ""
-pngName = ""
-pngEmpty = True
-urlEmpty = True
-
-
 gui = GUI()
 gui.show_window()  #opens window for user to select directory
-directory_path = ""
-
 directory_path = gui.get_directory()
 
 if not directory_path: #exiting pressing the x button on the GUI leaves the directory path empty, causing the program to close
@@ -75,7 +65,7 @@ if not directory_path: #exiting pressing the x button on the GUI leaves the dire
 
 
 while pngEmpty:
-    pngName = input("Enter the name you want for your code:").strip()   #strip() removes whitespace from the beginning and end of the string
+    pngName = input("Enter the name you want for your code:")  #strip() removes whitespace from the beginning and end of the string
     
     if pngName:
         print(f"Name entered for image {pngName}")
@@ -87,7 +77,7 @@ while pngEmpty:
 #Validate user input for url
 
 while urlEmpty: 
-    url = input("Enter the URL you want to generate a QR code for: ").strip()  #strip() removes whitespace from the beginning and end of the string
+    url = input("Enter the URL you want to generate a QR code for: ") #strip() removes whitespace from the beginning and end of the string
 
     if url:
         print(f"URL entered for QR code {url}")
