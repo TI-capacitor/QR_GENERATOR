@@ -1,4 +1,3 @@
-from py_compile import main
 from tkinter import Tk, filedialog
 from tkinter import *
 import qrcode 
