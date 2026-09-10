@@ -36,11 +36,13 @@ class GUI:
 class Qrcode:
     #class constructor
     def __init__(self,url,img_name,file_path):
-        self.url = url
-        self.file_path = file_path
-        self.img_name = img_name
+        self.url = url.strip()
+        self.file_path = file_path.strip() #removes whitespace from the beginning and end of the string`
+        self.img_name = img_name.strip()
         if not self.img_name.endswith(".png"):
-            self.img_name += ".png"
+                    self.img_name += ".png"
+        
+        
         
     #generate qr code and save it to the specified file path
     def get_qr(self):
@@ -64,7 +66,7 @@ if not directory_path: #exiting pressing the x button on the GUI leaves the dire
 
 
 while pngEmpty:
-    pngName = input("Enter the name you want for your code:").strip()   #strip() removes whitespace from the beginning and end of the string
+    pngName = input("Enter the name you want for your code:")  #strip() removes whitespace from the beginning and end of the string
     
     if pngName:
         print(f"Name entered for image {pngName}")
@@ -76,7 +78,7 @@ while pngEmpty:
 #Validate user input for url
 
 while urlEmpty: 
-    url = input("Enter the URL you want to generate a QR code for: ").strip()  #strip() removes whitespace from the beginning and end of the string
+    url = input("Enter the URL you want to generate a QR code for: ") #strip() removes whitespace from the beginning and end of the string
 
     if url:
         print(f"URL entered for QR code {url}")
