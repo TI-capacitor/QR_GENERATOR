@@ -61,7 +61,9 @@ directory_path = gui.get_directory()
 if not directory_path: #exiting pressing the x button on the GUI leaves the directory path empty, causing the program to close
     print("Goodbye!!!")
     sys.exit()
-
+    
+pngEmpty = True
+urlEmpty = True
 
 
 while pngEmpty:
