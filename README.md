@@ -9,4 +9,5 @@ It is still in early development, for now this prototype has the following featu
 
 # Long term goals (Minimum Viable Product)
 | Functional Requirements | Notes |
+| --- | --- |
 
