@@ -1,7 +1,6 @@
 import sys
 from gui import GUI
 from qr_code import QR
-import qrcode
 
 gui = GUI()
 gui.show_window()  #opens window for user to select directory
@@ -27,7 +26,7 @@ while True:
     if url:
         print(f"URL entered for QR code {url}")
         break
-    
+
     print("ERROR: URL cannot be blank")
 
 qr = QR(url, pngName, directory_path)  #create instance of QR class
