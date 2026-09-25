@@ -30,7 +30,7 @@ while True:
     print("ERROR: URL cannot be blank")
 
 qr = QR(url, pngName, directory_path)  #create instance of QR class
-qr.get_qr() #creates qr code with path provided by window GUI
+qr.generate() #creates qr code with path provided by window GUI
 qr.success_message()
 
 

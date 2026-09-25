@@ -15,12 +15,12 @@ class QR:
         
         
     #generate qr code and save it to the specified file path
-    def get_qr(self):
+    def generate(self):
         qr = qrcode.QRCode()
         qr.add_data(self.url)
         img = qr.make_image()
         self.full_path = os.path.join(self.file_path, self.img_name) #properly concatenates the file and image name
         img.save(self.full_path)
 
-    def success_message(self):
-        print(f"QR code generated successfully, saved at {self.full_path}")
+    # def success_message(self):
+    #     print(f"QR code generated successfully, saved at {self.full_path}")
