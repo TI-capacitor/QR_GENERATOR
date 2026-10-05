@@ -7,14 +7,13 @@ class GUI:
     def __init__(self):
         self.window = Tk()
         self.button = Button(text="Open Directory",command=self.set_directory)  #creates clickable button, command calls the get_directory method
-        self.button.pack()
         self.file_path = ""
 
     def show_window(self):
         self.window.mainloop() 
 
-    def pack_button():
-        pass
+    def pack_button(self):
+        self.button.pack()
         
     def set_directory(self):
         print("Opening file dialog")

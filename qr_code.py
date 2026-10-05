@@ -11,7 +11,7 @@ class QR:
         self.img_name = img_name.strip()
         
         
-    def check_png(self):
+    def append_png(self):
         if not self.img_name.endswith(".png"):
             self.img_name += ".png"
         
