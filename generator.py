@@ -12,9 +12,9 @@ if not directory_path: #exiting pressing the x button on the GUI leaves the dire
 
 
 while True:
-    pngName = input("Enter the name you want for your code:")  #strip() removes whitespace from the beginning and end of the string
-    if pngName:
-        print(f"Name entered for image {pngName}")
+    png_name = input("Enter the name you want for your code:")  #strip() removes whitespace from the beginning and end of the string
+    if png_name:
+        print(f"Name entered for image {png_name}")
         break
 
     print("ERROR: name of picture cannot be blank")
@@ -29,7 +29,7 @@ while True:
 
     print("ERROR: URL cannot be blank")
 
-qr = QR(url, pngName, directory_path)  #create instance of QR class
+qr = QR(url, png_name, directory_path)  #create instance of QR class
 qr.generate() #creates qr code with path provided by window GUI
 qr.success_message()
 

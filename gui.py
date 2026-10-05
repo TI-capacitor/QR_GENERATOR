@@ -12,6 +12,9 @@ class GUI:
 
     def show_window(self):
         self.window.mainloop() 
+
+    def pack_button():
+        pass
         
     def set_directory(self):
         print("Opening file dialog")

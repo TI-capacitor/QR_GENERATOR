@@ -9,10 +9,11 @@ class QR:
         self.url = url.strip()
         self.file_path = file_path.strip() #removes whitespace from the beginning and end of the string`
         self.img_name = img_name.strip()
+        
+        
+    def check_png(self):
         if not self.img_name.endswith(".png"):
             self.img_name += ".png"
-        
-        
         
     #generate qr code and save it to the specified file path
     def generate(self):
